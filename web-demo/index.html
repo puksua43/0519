@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>抢购快捷键盘 · 预览</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <p class="brand">Flash Fill</p>
+        <h1>抢购时，一键填完</h1>
+        <p class="sub">预设姓名、邮箱、电话，也能自己加地址、验证码等任意内容。</p>
+      </header>
+
+      <main class="phone">
+        <div class="status-bar"><span>9:41</span><span>5G</span></div>
+        <div class="chat">
+          <div class="bubble them">把快捷内容填好，切到下面的键盘试试。</div>
+          <div class="bubble me" id="mirror">（输入会显示在这里）</div>
+        </div>
+        <div class="composer">
+          <input id="field" type="text" placeholder="点这里开始输入…" autocomplete="off" />
+        </div>
+        <div class="keyboard" id="keyboard" aria-label="抢购快捷键盘"></div>
+      </main>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>自定义快捷内容</h2>
+          <button type="button" id="addBtn" class="primary">添加</button>
+        </div>
+        <ul id="list" class="list"></ul>
+        <p class="hint">数据保存在浏览器本地。真机 iOS 版请使用仓库里的 <code>FlashFillKeyboard</code> 工程。</p>
+      </section>
+    </div>
+
+    <dialog id="editor">
+      <form method="dialog" id="editorForm">
+        <h3 id="editorTitle">添加内容</h3>
+        <label>按钮名称<input name="label" required maxlength="8" placeholder="如：地址" /></label>
+        <label>插入内容<textarea name="value" rows="3" required placeholder="点击按钮后填入的文字"></textarea></label>
+        <label>形状
+          <select name="shape">
+            <option value="roundedRect">圆角矩形</option>
+            <option value="circle">圆形</option>
+          </select>
+        </label>
+        <fieldset class="colors">
+          <legend>颜色</legend>
+          <label><input type="radio" name="color" value="#4A90E2" checked /><span style="background:#4A90E2"></span></label>
+          <label><input type="radio" name="color" value="#7B68C7" /><span style="background:#7B68C7"></span></label>
+          <label><input type="radio" name="color" value="#F0C040" /><span style="background:#F0C040"></span></label>
+          <label><input type="radio" name="color" value="#E85D5D" /><span style="background:#E85D5D"></span></label>
+          <label><input type="radio" name="color" value="#3CB371" /><span style="background:#3CB371"></span></label>
+          <label><input type="radio" name="color" value="#F4A261" /><span style="background:#F4A261"></span></label>
+        </fieldset>
+        <div class="dialog-actions">
+          <button type="button" id="cancelEdit" value="cancel">取消</button>
+          <button type="submit" class="primary" value="save">保存</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

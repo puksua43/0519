@@ -1,0 +1,80 @@
+name: FlashFillKeyboard
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "15.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    DEVELOPMENT_TEAM: "" # 在 Xcode Signing 里填你的 Team
+    CODE_SIGN_STYLE: Automatic
+
+schemes:
+  FlashFillApp:
+    build:
+      targets:
+        FlashFillApp: all
+        KeyboardExtension: all
+    run:
+      config: Debug
+      targets:
+        - FlashFillApp
+
+targets:
+  FlashFillApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: FlashFillApp
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.flashfill
+        INFOPLIST_FILE: FlashFillApp/Info.plist
+        CODE_SIGN_ENTITLEMENTS: FlashFillApp/FlashFillApp.entitlements
+        PRODUCT_NAME: 抢购快捷
+        GENERATE_INFOPLIST_FILE: YES
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: 1
+    dependencies:
+      - target: KeyboardExtension
+        embed: true
+    info:
+      path: FlashFillApp/Info.plist
+      properties:
+        CFBundleDisplayName: 抢购快捷
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+
+  KeyboardExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: KeyboardExtension
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.flashfill.keyboard
+        INFOPLIST_FILE: KeyboardExtension/Info.plist
+        CODE_SIGN_ENTITLEMENTS: KeyboardExtension/KeyboardExtension.entitlements
+        PRODUCT_NAME: KeyboardExtension
+        GENERATE_INFOPLIST_FILE: YES
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: 1
+    info:
+      path: KeyboardExtension/Info.plist
+      properties:
+        CFBundleDisplayName: 抢购快捷
+        NSExtension:
+          NSExtensionAttributes:
+            IsASCIICapable: false
+            PrefersRightToLeft: false
+            PrimaryLanguage: zh-Hans
+            RequestsOpenAccess: true
+          NSExtensionPointIdentifier: com.apple.keyboard-service
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).KeyboardViewController
